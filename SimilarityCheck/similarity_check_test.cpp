@@ -8,6 +8,12 @@ public:
 	SimilarityChecker app;
 };
 
+TEST_F(SimilarityCheckerFixture, 빈문자열체크) {
+	int expected = 100;
+	int actual = app.checkSimilarity("", "");
+	EXPECT_EQ(expected, actual);
+}
+
 TEST_F(SimilarityCheckerFixture, 0퍼센트유사도체크) {
 	int expected = 0;
 	int actual = app.checkSimilarity("", "A");

@@ -6,11 +6,7 @@ public:
 		if (inputStr1 == inputStr2) {
 			return MAX_SCORE;
 		}
-
-		int retVal = getLengthSimilarityScore(inputStr1, inputStr2);
-		
-		return retVal;
-		
+		return getLengthSimilarityScore(inputStr1, inputStr2);
 	}
 
 	int getLengthSimilarityScore(const std::string& inputStr1, const std::string& inputStr2)
