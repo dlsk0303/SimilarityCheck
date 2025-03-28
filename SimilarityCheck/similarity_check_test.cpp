@@ -68,6 +68,18 @@ TEST_F(SimilarityCheckerFixture, CheckAlphabetTC2) {
 	EXPECT_EQ(expected, actual);
 }
 
+TEST_F(SimilarityCheckerFixture, CheckAlphabetTC3) {
+	int expected = 0;
+	int actual = app.checkAlphabetSimilarity("A", "BB");
+	EXPECT_EQ(expected, actual);
+}
+
+TEST_F(SimilarityCheckerFixture, CheckAlphabetTC4) {
+	int expected = 20;
+	int actual = app.checkAlphabetSimilarity("AA", "AAE");
+	EXPECT_EQ(expected, actual);
+}
+
 int main() {
 	::testing::InitGoogleMock();
 	return RUN_ALL_TESTS();

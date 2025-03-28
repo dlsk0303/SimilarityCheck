@@ -11,24 +11,17 @@ using std::cout;
 class SimilarityChecker {
 public:
 	int checkAlphabetSimilarity(std::string inputStr1, std::string inputStr2) {
-		bool alphabetCheckOfStr1[MAX_ALPHABET+1] = {false, };
-		bool alphabetCheckOfStr2[MAX_ALPHABET+1] = {false, };
+		bool alphabetCheckOfStr1[MAX_ALPHABET + 1] = { false, };
+		bool alphabetCheckOfStr2[MAX_ALPHABET + 1] = { false, };
 
-		int lenOfStr1 = inputStr1.length();
-		int lenOfStr2 = inputStr2.length();
+		setExistAlphabet(inputStr1, alphabetCheckOfStr1);
+		setExistAlphabet(inputStr2, alphabetCheckOfStr2);
 
-		if (lenOfStr1 == 0 || lenOfStr2 == 0) {
-			return 0;
-		}
-		cout << lenOfStr1 << " " << lenOfStr2 << "\n";
+		return calculateScoreOfAlphabet(alphabetCheckOfStr1, alphabetCheckOfStr2);
+	}
 
-		for (int i = 0; i < lenOfStr1; i++) {
-			alphabetCheckOfStr1[inputStr1[i] - 'A'] = true;
-		}
-		for (int i = 0; i < lenOfStr2; i++) {
-			alphabetCheckOfStr2[inputStr2[i] - 'A'] = true;
-		}
-
+	int calculateScoreOfAlphabet(bool  alphabetCheckOfStr1[27], bool  alphabetCheckOfStr2[27])
+	{
 		int sameCnt = 0;
 		int totalCnt = 0;
 		for (int i = 0; i < MAX_ALPHABET; i++) {
@@ -36,7 +29,6 @@ public:
 				sameCnt++;
 				totalCnt++;
 			}
-
 			else if (alphabetCheckOfStr1[i]) {
 				totalCnt++;
 			}
@@ -44,9 +36,16 @@ public:
 				totalCnt++;
 			}
 		}
-		cout << totalCnt << " " << sameCnt << "\n";
 
 		return sameCnt * MAX_ALPHABET_SCORE / totalCnt;
+	}
+
+	void setExistAlphabet(const std::string& inputStr, bool alphabetCheckOfStr[27])
+	{
+		int lenOfStr = inputStr.length();
+		for (int i = 0; i < lenOfStr; i++) {
+			alphabetCheckOfStr[inputStr[i] - 'A'] = true;
+		}
 	}
 
 	int checkSimilarity(std::string inputStr1, std::string inputStr2) {
