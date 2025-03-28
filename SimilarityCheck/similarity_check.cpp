@@ -10,14 +10,45 @@ using std::cout;
 
 class SimilarityChecker {
 public:
-	int checkAlphabetSimilarity(std::string inputStr1, std::string inputStr2) {
+	int checkSimilarity(std::string inputStr1, std::string inputStr2) {
+		if (inputStr1.empty() || inputStr2.empty()) return 0;
+		if (inputStr1 == inputStr2) return MAX_SCORE;
+
+		return getLengthSimilarityScore(inputStr1, inputStr2) +
+			getAlphabetSimilarityScore(inputStr1, inputStr2);
+	}
+
+	int getAlphabetSimilarityScore(std::string inputStr1, std::string inputStr2) {
 		bool alphabetCheckOfStr1[MAX_ALPHABET + 1] = { false, };
 		bool alphabetCheckOfStr2[MAX_ALPHABET + 1] = { false, };
 
-		setExistAlphabet(inputStr1, alphabetCheckOfStr1);
-		setExistAlphabet(inputStr2, alphabetCheckOfStr2);
+		setTruetExistAlphabet(inputStr1, alphabetCheckOfStr1);
+		setTruetExistAlphabet(inputStr2, alphabetCheckOfStr2);
 
 		return calculateScoreOfAlphabet(alphabetCheckOfStr1, alphabetCheckOfStr2);
+	}
+
+private:
+	int getLengthSimilarityScore(const std::string& inputStr1, const std::string& inputStr2)
+	{
+		int sizeofStr1 = inputStr1.length();
+		int sizeofStr2 = inputStr2.length();
+
+		if (sizeofStr1 == sizeofStr2)
+		{
+			return 	MAX_LENGTH_SCORE;
+		}
+
+		if (sizeofStr1 >= sizeofStr2) {
+			return calculatePartialScore(sizeofStr1, sizeofStr2);
+		}
+		return calculatePartialScore(sizeofStr2, sizeofStr1);
+	}
+
+	int calculatePartialScore(int longStr, int shortStr)
+	{
+		int gap = longStr - shortStr;
+		return (MAX_LENGTH_SCORE - (MAX_LENGTH_SCORE * gap / shortStr));
 	}
 
 	int calculateScoreOfAlphabet(bool  alphabetCheckOfStr1[27], bool  alphabetCheckOfStr2[27])
@@ -40,7 +71,7 @@ public:
 		return sameCnt * MAX_ALPHABET_SCORE / totalCnt;
 	}
 
-	void setExistAlphabet(const std::string& inputStr, bool alphabetCheckOfStr[27])
+	void setTruetExistAlphabet(const std::string& inputStr, bool alphabetCheckOfStr[27])
 	{
 		int lenOfStr = inputStr.length();
 		for (int i = 0; i < lenOfStr; i++) {
@@ -48,41 +79,6 @@ public:
 		}
 	}
 
-	int checkSimilarity(std::string inputStr1, std::string inputStr2) {
-		if (inputStr1 == inputStr2) {
-			return MAX_SCORE;
-		}
-		return getLengthSimilarityScore(inputStr1, inputStr2);
-	}
-
-	int getLengthSimilarityScore(const std::string& inputStr1, const std::string& inputStr2)
-	{
-		// 글자수 얻기
-		int sizeofStr1 = inputStr1.length();
-		int sizeofStr2 = inputStr2.length();
-		if (sizeofStr1 == 0 || sizeofStr2 == 0) {
-			return 0;
-		}
-
-		if (sizeofStr1 == sizeofStr2)
-		{
-			return 	MAX_LENGTH_SCORE;
-		}
-
-		if (sizeofStr1 >= sizeofStr2) {
-			return calculatePartialScore(sizeofStr1, sizeofStr2);
-		}
-
-		return calculatePartialScore(sizeofStr2, sizeofStr1);
-	}
-
-	int calculatePartialScore(int longStr, int shortStr)
-	{
-		int gap = longStr - shortStr;
-		return (MAX_LENGTH_SCORE - (MAX_LENGTH_SCORE * gap / shortStr));
-	}
-
-private:
 	const int MAX_SCORE = 100;
 	const int MAX_LENGTH_SCORE = 60;
 	const int MAX_ALPHABET_SCORE = 40;
