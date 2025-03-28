@@ -56,6 +56,18 @@ TEST_F(SimilarityCheckerFixture, 2배글자수검사하기2) {
 	EXPECT_EQ(expected, actual);
 }
 
+TEST_F(SimilarityCheckerFixture, CheckAlphabetTC1) {
+	int expected = 0;
+	int actual = app.checkAlphabetSimilarity("ABC", "DEFGHI");
+	EXPECT_EQ(expected, actual);
+}
+
+TEST_F(SimilarityCheckerFixture, CheckAlphabetTC2) {
+	int expected = 40;
+	int actual = app.checkAlphabetSimilarity("ASD", "DSA");
+	EXPECT_EQ(expected, actual);
+}
+
 int main() {
 	::testing::InitGoogleMock();
 	return RUN_ALL_TESTS();
