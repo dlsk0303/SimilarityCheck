@@ -1,4 +1,4 @@
-#include <string>
+ï»¿#include <string>
 
 class SimilarityChecker {
 public:
@@ -11,7 +11,7 @@ public:
 
 	int getLengthSimilarityScore(const std::string& inputStr1, const std::string& inputStr2)
 	{
-		// ±ÛÀÚ¼ö ¾ò±â
+		// ê¸€ììˆ˜ ì–»ê¸°
 		int sizeofStr1 = inputStr1.size();
 		int sizeofStr2 = inputStr2.size();
 		if (sizeofStr1 == 0 || sizeofStr2 == 0) {

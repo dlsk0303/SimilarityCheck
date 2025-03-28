@@ -1,4 +1,4 @@
-#include "gmock/gmock.h"
+ï»¿#include "gmock/gmock.h"
 #include "similarity_check.cpp"
 
 using namespace testing;
@@ -8,49 +8,49 @@ public:
 	SimilarityChecker app;
 };
 
-TEST_F(SimilarityCheckerFixture, ºó¹®ÀÚ¿­Ã¼Å©) {
+TEST_F(SimilarityCheckerFixture, ë¹ˆë¬¸ìì—´ì²´í¬) {
 	int expected = 100;
 	int actual = app.checkSimilarity("", "");
 	EXPECT_EQ(expected, actual);
 }
 
-TEST_F(SimilarityCheckerFixture, 0ÆÛ¼¾Æ®À¯»çµµÃ¼Å©) {
+TEST_F(SimilarityCheckerFixture, 0í¼ì„¼íŠ¸ìœ ì‚¬ë„ì²´í¬) {
 	int expected = 0;
 	int actual = app.checkSimilarity("", "A");
 	EXPECT_EQ(expected, actual);
 }
 
-TEST_F(SimilarityCheckerFixture, 100ÆÛ¼¾Æ®À¯»çµµÃ¼Å©) {
+TEST_F(SimilarityCheckerFixture, 100í¼ì„¼íŠ¸ìœ ì‚¬ë„ì²´í¬) {
 	int expected = 100;
 	int actual = app.checkSimilarity("ABC", "ABC");
 	EXPECT_EQ(expected, actual);
 }
 
-TEST_F(SimilarityCheckerFixture, ±ÛÀÚ¼ö°Ë»çÇÏ±â) {
+TEST_F(SimilarityCheckerFixture, ê¸€ììˆ˜ê²€ì‚¬í•˜ê¸°) {
 	int expected = 60;
 	int actual = app.checkSimilarity("ABC", "DEF");
 	EXPECT_EQ(expected, actual);
 }
 
-TEST_F(SimilarityCheckerFixture, ºÎºĞ±ÛÀÚ¼ö°Ë»çÇÏ±â1) {
+TEST_F(SimilarityCheckerFixture, ë¶€ë¶„ê¸€ììˆ˜ê²€ì‚¬í•˜ê¸°1) {
 	int expected = 20;
 	int actual = app.checkSimilarity("AAABB", "BAA");
 	EXPECT_EQ(expected, actual);
 }
 
-TEST_F(SimilarityCheckerFixture, ºÎºĞ±ÛÀÚ¼ö°Ë»çÇÏ±â2) {
+TEST_F(SimilarityCheckerFixture, ë¶€ë¶„ê¸€ììˆ˜ê²€ì‚¬í•˜ê¸°2) {
 	int expected = 30;
 	int actual = app.checkSimilarity("AA", "AAE");
 	EXPECT_EQ(expected, actual);
 }
 
-TEST_F(SimilarityCheckerFixture, 2¹è±ÛÀÚ¼ö°Ë»çÇÏ±â1) {
+TEST_F(SimilarityCheckerFixture, 2ë°°ê¸€ììˆ˜ê²€ì‚¬í•˜ê¸°1) {
 	int expected = 0;
 	int actual = app.checkSimilarity("ABCDEF", "GHI");
 	EXPECT_EQ(expected, actual);
 }
 
-TEST_F(SimilarityCheckerFixture, 2¹è±ÛÀÚ¼ö°Ë»çÇÏ±â2) {
+TEST_F(SimilarityCheckerFixture, 2ë°°ê¸€ììˆ˜ê²€ì‚¬í•˜ê¸°2) {
 	int expected = 0;
 	int actual = app.checkSimilarity("ABC", "DEFGHI");
 	EXPECT_EQ(expected, actual);
